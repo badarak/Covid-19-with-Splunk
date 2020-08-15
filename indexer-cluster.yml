@@ -1,0 +1,30 @@
+version: "3.6"
+
+services:
+  spl-midx01:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-midx01
+    container_name: spl-midx01
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8000:8000
+  spl-idx01:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-idx01
+    container_name: spl-idx01
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8001:8000
+  spl-idx02:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-idx02
+    container_name: spl-idx02
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8002:8000
