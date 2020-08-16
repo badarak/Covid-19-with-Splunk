@@ -1,0 +1,30 @@
+version: "3.6"
+
+services:
+  spl-sh01:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-sh01
+    container_name: spl-sh01
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8005:8000
+  spl-sh02:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-sh02
+    container_name: spl-sh02
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8006:8000
+  spl-deployer01:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: spl-deployer01
+    container_name: spl-deployer01
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=test@123 # replace with y're password
+    ports:
+      - 8007:8000
