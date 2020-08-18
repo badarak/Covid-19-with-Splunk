@@ -23,6 +23,7 @@ Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 
 3. Install & configuration de l'Index Cluster
 
+- lancer la commande ci-dessous depuis le répertoire docker du projet :
 docker-compose -p covid-19 -f indexer-cluster.yml up -d
 
 3-1. Configuration du noeud master
@@ -179,6 +180,7 @@ sourcetype = covid_19
 
 5. Install & configuration du Search Head cluster
 
+- lancer la commande ci-dessous depuis le répertoire docker du projet :
 docker-compose -p covid-19 -f search-head-cluster.yml up -d
 
 5.1- Configuration du deployer
@@ -247,7 +249,13 @@ Faire de même pour la 2ème SH
 
 6. Analyse de la mortalite en hôspital du Covid-19
 
-6.1- Requêtes SPL associées
+6-1 Récupération des données
+
+- lancer le script de chargement depuis le répertoire scripts:
+
+ ./dataLoader.sh
+
+6.2- Requêtes SPL associées
 
 # Le cumul des décès Covid-19 en hôpital à une date donnée
 index=idx_covid_19 sexe = 0
