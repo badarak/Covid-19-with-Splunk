@@ -10,6 +10,8 @@ services:
       - SPLUNK_PASSWORD=test@123 # replace with y're password
     ports:
       - 8000:8000
+    networks:
+      - splunk-network
   spl-idx01:
     image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
     hostname: spl-idx01
@@ -19,6 +21,8 @@ services:
       - SPLUNK_PASSWORD=test@123 # replace with y're password
     ports:
       - 8001:8000
+    networks:
+      - splunk-network
   spl-idx02:
     image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
     hostname: spl-idx02
@@ -28,3 +32,8 @@ services:
       - SPLUNK_PASSWORD=test@123 # replace with y're password
     ports:
       - 8002:8000
+    networks:
+      - splunk-network
+networks:
+  splunk-network:
+    driver: bridge
