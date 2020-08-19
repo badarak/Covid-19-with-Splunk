@@ -1,4 +1,4 @@
-# covid-19-with-splunk
+# Covid-19-with-Splunk
 
 Ce projet a pour but d'analyser la mortalité en hôpital du Covid-19 en France. Nous répondrons aux questions suivantes:
 
@@ -23,7 +23,7 @@ Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 
 **3. Install & configuration de l'Index Cluster**
 
-* lancer la commande ci-dessous depuis le répertoire docker du projet :
+* lancer la commande ci-dessous depuis le répertoire *docker* du projet :
 
 `docker-compose -p covid-19 -f indexer-cluster.yml up -d`
 
@@ -189,7 +189,7 @@ disabled = false
 pulldown_type = 1
 ```
 
-* spécifier le répertoire dans lequel les données hospitalières arriverons :
+* spécifier le répertoire dans lequel les données hospitalières arriveront :
 
 `mkdir -p /data/covid_19`
 
@@ -209,7 +209,7 @@ sourcetype = covid_19
 
 **5. Install & configuration du Search Head cluster**
 
-* lancer la commande ci-dessous depuis le répertoire docker du projet :
+* lancer la commande ci-dessous depuis le répertoire *docker* du projet :
 
 `docker-compose -p covid-19 -f search-head-cluster.yml up -d`
 
@@ -268,7 +268,7 @@ Puis relancer l'instance
                        -servers_list "https://172.28.0.3:8089","https://172.28.0.2:8089"
 ```
 
-**Intéger le Search Head Cluster à l'Indexer Cluster**
+**Intégrer le Search Head Cluster à l'Indexer Cluster**
 
 * se connecter au 1er search head - `spl-sh01` :
 
