@@ -327,3 +327,5 @@ index=idx_covid_19 sexe != 0
 ```
 
 **Dashboad associé**
+
+![Dashboard](/images/dashboad.png)
