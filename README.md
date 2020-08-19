@@ -8,13 +8,13 @@ Ce projet a pour but d'analyser la mortalité en hôpital du Covid-19 en France.
 
 Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 
-1. Pré-requis
+**1. Pré-requis**
 
 - [Docker](https://www.docker.com/)
 - [Splunk](https://www.splunk.com/)
 - [Données hospitalières](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/)
 
-2.  Topologie du dépoiement Splunk
+**2.  Topologie du dépoiement Splunk**
 
 * un Indexer Cluster constitué d'un master node (`spl-midx01`) et de 2 peers nodes (`spl-idx01` et `spl-idx02`)
 * un Universal Forwarder (`u-fwd01`)
@@ -24,14 +24,17 @@ Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 **3. Install & configuration de l'Index Cluster**
 
 * lancer la commande ci-dessous depuis le répertoire docker du projet :
+
 `docker-compose -p covid-19 -f indexer-cluster.yml up -d`
 
 **Configuration du noeud master**
 
 * se connecter sur le noeud master :
-  docker exec -it -u splunk spl-midx01 bash
 
-* ajouter le stanza ci-dessous dans le fichier server.conf - /opt/splunk/etc/system/local
+  `docker exec -it -u splunk spl-midx01 bash`
+
+* ajouter le stanza ci-dessous dans le fichier `server.conf - /opt/splunk/etc/system/local`:
+
 ```
 [clustering]
 mode = master
@@ -43,10 +46,12 @@ replication_factor = 2
 
 **Configuration des noeuds esclaves**
 
-* se connecter sur le 1er noeud esclave - spl-idx01 :
-  docker exec -it -u splunk spl-idx01 bash
+* se connecter sur le 1er noeud esclave - `spl-idx01` :
 
-* ajouter les stanza ci-dessous dans le fichier server.conf - /opt/splunk/etc/system/local :
+  `docker exec -it -u splunk spl-idx01 bash`
+
+* ajouter les stanza ci-dessous dans le fichier `server.conf - /opt/splunk/etc/system/local` :
+
 ```
 [replication_port://8080]
 
@@ -55,14 +60,17 @@ master_uri = https://172.28.0.6:8089
 mode = slave
 pass4SymmKey = test@123
 ```
+
 * Puis redémarrer le peer node `spl-idx01` :
+
 `/opt/splunk/bin/splunk restart`
 
-* Faire de même pour le 2ème noeud spl-idx02
+* Faire de même pour le 2ème noeud `spl-idx02`
 
  **Ajout d'un index et d'un "source type" au niveau du master**
 
 * se connecter sur le noeud master :
+
   `docker exec -it -u splunk spl-midx01 bash`
 
 
@@ -74,7 +82,8 @@ pass4SymmKey = test@123
   thawedPath = $SPLUNK_DB/idx_covid_19/thaweddb
   repFactor = auto
 ```
-* créer un Source Type dans le fichier props.conf - /opt/splunk/etc/master-apps/_cluster/local :
+
+* créer un Source Type dans le fichier `props.conf - /opt/splunk/etc/master-apps/_cluster/local` :
 
 ```
 [covid_19]
@@ -89,6 +98,7 @@ category = Custom
 disabled = false
 pulldown_type = 1
 ```
+
 * pusher ces configurations depuis le master vers les peers nodes :
 
    `/opt/splunk/bin/splunk apply cluster-bundle`
@@ -100,18 +110,21 @@ pulldown_type = 1
 **Spécifier le mode de découverte de l'indexer cluster par les Forwarders**
 
    * se connecter sur le noeud master :
+   
      `docker exec -it -u splunk spl-midx01 bash`
 
    * ajouter le stanza ci-dessous dans le fichier `server.conf - /opt/splunk/etc/system/local` :
+   
    ```
    [indexer_discovery]
    pass4SymmKey = test@123
    ```
    
    * Puis redémarrer le master :
+   
    `/opt/splunk/bin/splunk restart`
 
-4. Install & configuration de l'Universal Forwarder
+**4. Install & configuration de l'Universal Forwarder**
 
 4.1. Install de l'Universal Forwarder
 
