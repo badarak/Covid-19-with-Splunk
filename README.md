@@ -1,10 +1,10 @@
 # covid-19-with-splunk
 
-Ce projet a pour but d'analyser la mortalité du Covid-19 en France. Nous répondrons aux questions:
+Ce projet a pour but d'analyser la mortalité en hôpital du Covid-19 en France. Nous répondrons aux questions suivantes:
 
-– Top 20 des départements les plus touchés par la mortalité du Covid-19 ?
-– Répartition de la mortalité du Covid-19 en Hôpital par Genre
-– Le cumul des décès Covid-19 en hôpital à une date donnée
+* Top 20 des départements les plus touchés par la mortalité du Covid-19 ?
+* Répartition de la mortalité du Covid-19 par Genre
+* Le cumul des décès Covid-19 en hôpital à une date donnée
 
 Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 
@@ -16,9 +16,9 @@ Pour ce faire, nous utiliserons Splunk avec un déploiement distribué.
 
 2.  Topologie du dépoiement Splunk
 
-- un Indexer Cluster constitué d'un master node (spl-midx01) et de 2 peers nodes (spl-idx01 et spl-idx02)
-- un Universal Forwarder (u-fwd01)
-- un Search Head Cluster composé de 2 search headers (spl-sh01 et spl-sh02) et d'un deployer (spl-deployer01)
+*un Indexer Cluster constitué d'un master node (`spl-midx01`) et de 2 peers nodes (`spl-idx01` et `spl-idx02`)
+*un Universal Forwarder (`u-fwd01`)
+*un Search Head Cluster composé de 2 search headers (`spl-sh01` et `spl-sh02`) et d'un deployer (`spl-deployer01`)
 
 
 3. Install & configuration de l'Index Cluster
